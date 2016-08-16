@@ -1,9 +1,11 @@
-FROM golang:1.5
+FROM golang:1.7
 
 MAINTAINER Katsuma Ito <katsumai@gmail.com>
 
 RUN apt-get update -q \
 && apt-get install -y --force-yes --no-install-recommends \
+  pkg-config \
+  libxml2-dev \
   rlwrap \
 \
 && curl https://deb.nodesource.com/node_5.x/pool/main/n/nodejs/nodejs_5.3.0-1nodesource1~jessie1_amd64.deb > node.deb \
