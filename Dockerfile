@@ -1,4 +1,4 @@
-FROM golang:1.7
+FROM golang:1.8.3
 
 MAINTAINER Katsuma Ito <katsumai@gmail.com>
 
@@ -8,10 +8,10 @@ RUN apt-get update -q \
   libxml2-dev \
   rlwrap \
 \
-&& curl https://deb.nodesource.com/node_5.x/pool/main/n/nodejs/nodejs_5.3.0-1nodesource1~jessie1_amd64.deb > node.deb \
-&& dpkg -i node.deb && rm node.deb \
+&& curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+&& apt-get install -y nodejs \
 && npm install -g node-gyp \
-&& npm cache clear \
+&& npm cache --force clear \
 \
 && apt-get clean -y \
 && rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/* /var/cache/apt/*
