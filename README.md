@@ -4,5 +4,7 @@ This image is based on [golang](https://hub.docker.com/_/golang/) and for use as
 
 This image contains these libraries:
 
-- Go1.8
+- Go1.10.3
 - NodeJS 8.x (via NodeSource's APT repository)
+  - yarn 1.7.0
+  - npm 5.6.0
