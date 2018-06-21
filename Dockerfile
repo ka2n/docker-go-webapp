@@ -1,4 +1,4 @@
-FROM golang:1.9.0-alpine3.6
+FROM golang:1.10.3-alpine3.7
 
 MAINTAINER Katsuma Ito <katsumai@gmail.com>
 
@@ -6,7 +6,7 @@ RUN apk add --no-cache ca-certificates git
 
 # Copy from https://raw.githubusercontent.com/nodejs/docker-node/b1d4ff57bc3347818a0977b772d44f8f0753868a/8.5/alpine/Dockerfile
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 8.5.0
+ENV NODE_VERSION 8.11.3
 RUN addgroup -g 1000 node \
     && adduser -u 1000 -G node -s /bin/sh -D node \
     && apk add --no-cache \
@@ -23,14 +23,15 @@ RUN addgroup -g 1000 node \
         python \
   # gpg keys listed at https://github.com/nodejs/node#release-team
   && for key in \
-    9554F04D7259F04124DE6B476D5A82AC7E37093B \
     94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
     FD3A5288F042B6850C66B31F09FE44734EB7990E \
     71DCFD284A79C3B38668286BC97EC7A07EDE3FC1 \
     DD8F2338BAE7501E3DD5AC78C273792F7D83545D \
-    B9AE9905FFD7803F25714661B63B535A4C206CA9 \
     C4F0DFFF4E8C1A8236409D08E73BC641CC11F4C8 \
+    B9AE9905FFD7803F25714661B63B535A4C206CA9 \
     56730D5401028683275BD23C23EFEFE93C4CFFFE \
+    77984A986EBC2AA786BC0F66B01FBB92821C587A \
+    8FCCA13FEF1D0C2E91008E09770F7A9A5AE15600 \
   ; do \
     gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
     gpg --keyserver keyserver.pgp.com --recv-keys "$key" || \
@@ -50,7 +51,7 @@ RUN addgroup -g 1000 node \
     && rm -Rf "node-v$NODE_VERSION" \
     && rm "node-v$NODE_VERSION.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt
 
-ENV YARN_VERSION 1.0.2
+ENV YARN_VERSION 1.7.0
 
 RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   && for key in \
